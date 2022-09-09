@@ -1,30 +1,46 @@
 import React from 'react'
 import { Sidebar } from './components'
 import { Accounts, Analytics, Dashboard, Files, Inbox, Schedule, Search, Settings } from './pages'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
+  const user = true
+
   return (
-    <div className='flex' >
-      <Sidebar />
+    <div>
 
-      <div className='p-7 flex-1 h-screen'>
+      {
+        !user ?
+          <Routes>
+            <Route path='/' element="Ecommerce Login" />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
 
-        <Routes>
-          <Route path='/' element="Ecommerce hello" />
-          <Route path='/dashboard' element={(<Dashboard />)} />
-          <Route path='/inbox' element={(<Inbox />)} />
-          <Route path='/accounts' element={(<Accounts />)} />
-          <Route path='/schedule' element={(<Schedule />)} />
-          <Route path='/search' element={(<Search />)} />
-          <Route path='/analytics' element={(<Analytics />)} />
-          <Route path='/files' element={(<Files />)} />
-          <Route path='/setting' element={(<Settings />)} />
-        </Routes>
-        {/* <h1 className='p-7 text-2xl font-semibold flex-1 h-screen'>Hello U</h1> */}
-      </div>
+          :
+
+          <div className='flex' >
+            <Sidebar />
+
+            <div className='p-7 flex-1 h-screen'>
+
+              <Routes>
+                <Route path='/' element="Ecommerce hello" />
+                <Route path='/dashboard' element={(<Dashboard />)} />
+                <Route path='/inbox' element={(<Inbox />)} />
+                <Route path='/accounts' element={(<Accounts />)} />
+                <Route path='/schedule' element={(<Schedule />)} />
+                <Route path='/search' element={(<Search />)} />
+                <Route path='/analytics' element={(<Analytics />)} />
+                <Route path='/files' element={(<Files />)} />
+                <Route path='/setting' element={(<Settings />)} />
+              </Routes>
+              {/* <h1 className='p-7 text-2xl font-semibold flex-1 h-screen'>Hello U</h1> */}
+            </div>
+          </div>
+      }
 
     </div>
+
   );
 }
 
